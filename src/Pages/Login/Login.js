@@ -22,7 +22,7 @@ const Login = () => {
                                 <input className='w-full btn-submit btn btn-outline btn-success' type="submit" value="Login" />
                             </button>
                         </div>
-                        {/* <p>You do'nt have an account <Link to='/register'></Link> </p> */}
+                        <p>You do'nt have an account <Link className='btn-link' to='/register'>register</Link> </p>
                     </div>
                 </form>
             </div>
