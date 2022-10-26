@@ -43,10 +43,10 @@ const Login = () => {
                             <input type="text" placeholder="photoURL" name='photoURL' />
                         </div>
                         <div className="form-control email">
-                            <input type="email" placeholder="email" name='email' />
+                            <input type="email" placeholder="email" name='email' required />
                         </div>
                         <div className="form-control email">
-                            <input type="password" placeholder="password" name='password' />
+                            <input type="password" placeholder="password" name='password' required/>
                         </div>
                         <div className="form-control mt-6">
                             <button>
