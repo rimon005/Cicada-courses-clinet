@@ -2,12 +2,12 @@ import React from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/UserContext/AuthProvider';
-import { FaGoogle } from "react-icons/fa";
+import { FaGoogle , FaGithub} from "react-icons/fa";
 import './style.css'
 
 const Login = () => {
 
-    const { createUser , googleSignIn , setUser} = useContext(AuthContext);
+    const { createUser , googleSignIn , setUser, gitHubSignIn} = useContext(AuthContext);
 
 
     const handleSubmit = event => {
@@ -39,6 +39,17 @@ const Login = () => {
         })
         .catch(e => console.error(e))
     }
+
+    const handleGitHubSignIn = () =>{
+        gitHubSignIn()
+        .then(result =>{
+            const user =result.user;
+            setUser(user);
+            console.log(user);
+        })
+        .catch(e => console.error(e))
+    }
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-col">
@@ -65,7 +76,8 @@ const Login = () => {
                             </button>
                         </div>
                         <div className='border p-4 flex justify-center'>
-                            <FaGoogle className='text-3xl' onClick={handleGoogleSingIn}> </FaGoogle>
+                            <FaGoogle className='text-3xl mx-3' onClick={handleGoogleSingIn}> </FaGoogle>
+                            <FaGithub className='text-3xl' onClick={handleGitHubSignIn}></FaGithub>
                         </div>
                         <p>You do have an account <Link className='btn-link' to='/login'>login</Link> </p>
                     </div>

@@ -48,10 +48,15 @@ const Navbar = () => {
                 {
                     user?.uid ?
                         <>
-                            <div className="dropdown dropdown-end navbar-end">
+                            <div className="dropdown dropdown-end navbar-end tooltip tooltip-bottom" data-tip={user.displayName} >
                                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
-                                        <img src="https://placeimg.com/80/80/people" />
+                                        {
+                                            user?.photoURL ?
+                                            <img src={user?.photoURL} alt="" />
+                                            :
+                                            <></>
+                                        }
                                     </div>
                                 </label>
                                 <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
