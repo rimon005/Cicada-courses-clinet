@@ -7,7 +7,6 @@ import Courses from './Pages/Courses/Courses';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Login/Register';
-import Navbar from './Pages/Navbar/Navbar';
 
 function App() {
 

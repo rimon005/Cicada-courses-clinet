@@ -1,0 +1,9 @@
+.email input{
+    border: none;
+    border-bottom: 1px solid #a7b3ff;
+    padding: 15px;
+    background-color: #FAF7F5;
+}
+.email input ::placeholder{
+    color: rgb(175,175,175);
+}
