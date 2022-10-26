@@ -2,8 +2,8 @@ import React from 'react';
 import { createContext } from 'react';
 import { useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
-import app from '../../firebase/firebase.config';
 import { useEffect } from 'react';
+import app from '../../firebase/firebase.config';
 
 export const AuthContext = createContext();
 
@@ -11,26 +11,26 @@ const auth = getAuth(app)
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState();
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider()
     const googleSignIn = () => {
-        setLoading(true)
+        // setLoading(true)
         return signInWithPopup(auth, googleProvider)
     }
 
 
     const signIn = (email, password) => {
-        setLoading(true)
+        // setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     const createUser = (email, password) => {
-        setLoading(true)
+        // setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const logOut = () => {
-        setLoading(true)
+        // setLoading(true)
         return signOut(auth)
     }
 
@@ -48,7 +48,7 @@ const AuthProvider = ({ children }) => {
             if (currentUser === null || currentUser.emailVerified) {
                 setUser(currentUser);
             }
-            setLoading(false)
+            // setLoading(false)
         })
 
         return () => {
@@ -58,7 +58,9 @@ const AuthProvider = ({ children }) => {
 
 
 
-    const authInfo = { user, googleSignIn, signIn, createUser, logOut, loading,setLoading, updateUserProfile, verifyEmail }
+    const authInfo = { user, googleSignIn, signIn, createUser, logOut, 
+        // loading,setLoading, 
+        updateUserProfile, verifyEmail }
 
     return (
         <AuthContext.Provider value={authInfo} >
