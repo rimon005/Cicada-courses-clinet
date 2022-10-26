@@ -2,14 +2,15 @@ import React from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/UserContext/AuthProvider';
+import { FaGoogle } from "react-icons/fa";
 import './style.css'
 
 const Login = () => {
 
-    const {createUser} = useContext(AuthContext);
+    const { createUser , googleSignIn , setUser} = useContext(AuthContext);
 
 
-    const handleSubmit = event =>{
+    const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
@@ -27,6 +28,16 @@ const Login = () => {
             .catch(e => {
                 console.error(e);
             });
+    }
+
+    const handleGoogleSingIn = () =>{
+        googleSignIn()
+        .then(result => {
+            const user = result.user;
+            setUser(user);
+            console.log(user);
+        })
+        .catch(e => console.error(e))
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -46,12 +57,15 @@ const Login = () => {
                             <input type="email" placeholder="email" name='email' required />
                         </div>
                         <div className="form-control email">
-                            <input type="password" placeholder="password" name='password' required/>
+                            <input type="password" placeholder="password" name='password' required />
                         </div>
                         <div className="form-control mt-6">
                             <button>
                                 <input className='w-full btn-submit btn btn-outline btn-success' type="submit" value="Register" />
                             </button>
+                        </div>
+                        <div className='border p-4 flex justify-center'>
+                            <FaGoogle className='text-3xl' onClick={handleGoogleSingIn}> </FaGoogle>
                         </div>
                         <p>You do have an account <Link className='btn-link' to='/login'>login</Link> </p>
                     </div>

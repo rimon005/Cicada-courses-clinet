@@ -3,27 +3,38 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/UserContext/AuthProvider';
 import './style.css'
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
 
-    const {signIn} = useContext(AuthContext)
+    const { signIn, googleSignIn, setUser } = useContext(AuthContext)
 
 
-    const handleSubmit = (event) =>{
+    const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        
-        signIn(email , password)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-            form.reset()
-            // navigate(from , {replace: true}) 
-        })
-        .catch(error => console.error(error))
 
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset()
+                // navigate(from , {replace: true}) 
+            })
+            .catch(error => console.error(error))
+
+    }
+
+    const handleGoogleSingIn = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                setUser(user);
+                console.log(user);
+            })
+            .catch(e => console.error(e))
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -34,7 +45,7 @@ const Login = () => {
                             <h1 className="text-2xl font-bold text-center">Login now!</h1>
                         </div>
                         <div className="form-control email">
-                            <input type="email" placeholder="email" name='email' required/>
+                            <input type="email" placeholder="email" name='email' required />
                         </div>
                         <div className="form-control email">
                             <input type="password" placeholder="password" name='password' required />
@@ -44,9 +55,14 @@ const Login = () => {
                                 <input className='w-full btn-submit btn btn-outline btn-success' type="submit" value="Login" />
                             </button>
                         </div>
+                        <div className='border p-4 flex justify-center'>
+                            <FaGoogle className='text-3xl' onClick={handleGoogleSingIn}> </FaGoogle>
+                        </div>
                         <p>You do'nt have an account <Link className='btn-link' to='/register'>register</Link> </p>
                     </div>
+
                 </form>
+
             </div>
         </div>
     );
