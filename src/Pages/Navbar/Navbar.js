@@ -1,10 +1,24 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/UserContext/AuthProvider';
+import './Navber.css'
 
 const Navbar = () => {
+    const [theme , setTheme] = useState("cupcake");
+    useEffect(()=>{
+    },[theme]);
 
+    const toggleBtn = () =>{
+        if(theme === "cupcake"){
+            setTheme("luxury")
+        }
+        else{
+            setTheme("cupcake")
+        }
+    }
     const { user, logOut } = useContext(AuthContext);
 
 
@@ -40,7 +54,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="form-control">
-                    <label className="label cursor-pointer">
+                    <label onClick={toggleBtn} className="label cursor-pointer">
                         <input type="checkbox" className="toggle" />
                     </label>
                 </div>
