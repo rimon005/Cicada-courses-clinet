@@ -39,12 +39,11 @@ const Navbar = () => {
                         <li><Link to='/blog'>Blog</Link></li>
                     </ul>
                 </div>
-                {/* <button className="btn btn-ghost btn-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                </button> */}
-                {/* <div className="form-control mx-5">
-                    <input type="text" placeholder="Search" className=" input input-bordered rounded-none" />
-                </div> */}
+                <div className="form-control">
+                    <label className="label cursor-pointer">
+                        <input type="checkbox" className="toggle" />
+                    </label>
+                </div>
                 {
                     user?.uid ?
                         <>
@@ -53,9 +52,9 @@ const Navbar = () => {
                                     <div className="w-10 rounded-full">
                                         {
                                             user?.photoURL ?
-                                            <img src={user?.photoURL} alt="" />
-                                            :
-                                            <></>
+                                                <img src={user?.photoURL} alt="" />
+                                                :
+                                                <img src="https://placeimg.com/80/80/people" />
                                         }
                                     </div>
                                 </label>
@@ -67,7 +66,7 @@ const Navbar = () => {
                                         </a>
                                     </li>
                                     <li><a>Settings</a></li>
-                                    <button className="btn btn-active"  onClick={handleLogOut}> LogOut</button>
+                                    <button className="btn btn-active" onClick={handleLogOut}> LogOut</button>
                                 </ul>
                             </div>
                         </>

@@ -1,0 +1,10 @@
+.details-btn{
+    border: 1px solid orange;
+    padding: 10px 20px;
+}
+@media screen and (max-width:756px) {
+    .summary-card{
+        width: 80%;
+        margin: 0 auto;
+    }
+}

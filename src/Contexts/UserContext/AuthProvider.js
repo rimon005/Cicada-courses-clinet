@@ -11,13 +11,13 @@ const auth = getAuth(app)
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState();
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
 
     const gitHubProvider = new GithubAuthProvider();
 
     const googleSignIn = () => {
-        // setLoading(true)
+        setLoading(true)
         return signInWithPopup(auth, googleProvider)
     }
 
@@ -26,17 +26,17 @@ const AuthProvider = ({ children }) => {
     }
 
     const signIn = (email, password) => {
-        // setLoading(true)
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     const createUser = (email, password) => {
-        // setLoading(true)
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const logOut = () => {
-        // setLoading(true)
+        setLoading(true)
         return signOut(auth)
     }
 
@@ -44,18 +44,11 @@ const AuthProvider = ({ children }) => {
         return updateProfile(auth.currentUser, profile)
     }
 
-    const verifyEmail = () => {
-        return sendEmailVerification(auth.currentUser)
-    }
-
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log(currentUser);
+            // console.log(currentUser);
             setUser(currentUser)
-            // if (currentUser === null || currentUser.emailVerified) {
-            //     setUser(currentUser);
-            // }
-            // setLoading(false)
+            setLoading(false)
         })
 
         return () => {
@@ -66,8 +59,8 @@ const AuthProvider = ({ children }) => {
 
 
     const authInfo = { user,setUser, googleSignIn, gitHubSignIn,signIn, createUser, logOut, 
-        // loading,setLoading, 
-        updateUserProfile, verifyEmail }
+        loading,setLoading, 
+        updateUserProfile }
 
     return (
         <AuthContext.Provider value={authInfo} >

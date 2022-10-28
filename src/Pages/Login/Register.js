@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/UserContext/AuthProvider';
 import { FaGoogle , FaGithub} from "react-icons/fa";
 import './style.css'
+import { useState } from 'react';
 
-const Login = () => {
-
+const Register = () => {
+    const [error , setError ] = useState('')
     const { createUser , googleSignIn , setUser, gitHubSignIn} = useContext(AuthContext);
 
 
@@ -26,6 +27,7 @@ const Login = () => {
                 form.reset();
             })
             .catch(e => {
+                setError(e.message)
                 console.error(e);
             });
     }
@@ -37,7 +39,9 @@ const Login = () => {
             setUser(user);
             console.log(user);
         })
-        .catch(e => console.error(e))
+        .catch(e => {
+            setError(e.message)
+            console.error(e)})
     }
 
     const handleGitHubSignIn = () =>{
@@ -47,7 +51,10 @@ const Login = () => {
             setUser(user);
             console.log(user);
         })
-        .catch(e => console.error(e))
+        .catch(e => {
+            setError(e.message)
+            console.error(e)
+        })
     }
 
     return (
@@ -70,6 +77,7 @@ const Login = () => {
                         <div className="form-control email">
                             <input type="password" placeholder="password" name='password' required />
                         </div>
+                        <p className='text-warning'>{error}</p>
                         <div className="form-control mt-6">
                             <button>
                                 <input className='w-full btn-submit btn btn-outline btn-success' type="submit" value="Register" />
@@ -87,4 +95,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

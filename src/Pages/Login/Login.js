@@ -1,14 +1,19 @@
 import React from 'react';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/UserContext/AuthProvider';
 import './style.css'
 import { FaGoogle,FaGithub} from "react-icons/fa";
+import { useState } from 'react';
 
 const Login = () => {
 
-    const { signIn, googleSignIn, setUser , gitHubSignIn} = useContext(AuthContext)
+    const { signIn, googleSignIn, setUser , gitHubSignIn , setLoading} = useContext(AuthContext);
+    const [error , setError] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
 
+    const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -21,9 +26,15 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset()
-                // navigate(from , {replace: true}) 
+                navigate(from , {replace: true}) 
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            })
+            .finally(() => {
+                setLoading(false);
+            })
 
     }
 
@@ -34,7 +45,10 @@ const Login = () => {
                 setUser(user);
                 console.log(user);
             })
-            .catch(e => console.error(e))
+            .catch(e =>{ 
+                 console.error(e)
+                setError(e.message)
+                })
     }
 
     const handleGitHubSignIn = () =>{
@@ -44,7 +58,10 @@ const Login = () => {
             setUser(user);
             console.log(user);
         })
-        .catch(e => console.error(e))
+        .catch(e => {
+            setError(e.message)
+            console.error(e)
+        })
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -60,6 +77,7 @@ const Login = () => {
                         <div className="form-control email">
                             <input type="password" placeholder="password" name='password' required />
                         </div>
+                        <p className='text-warning'>{error}</p>
                         <div className="form-control mt-6">
                             <button>
                                 <input className='w-full btn-submit btn btn-outline btn-success' type="submit" value="Login" />

@@ -1,0 +1,11 @@
+.category{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+@media screen and (max-width:756px) {
+    .category{
+        grid-template-columns: 1fr;
+    }
+}
